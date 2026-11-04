@@ -78,18 +78,6 @@
       </div>
     </section>
 
-    <section class="consent-wrap section-narrow" id="consent">
-      <div class="consent-title">
-        <span>Перед оплатой</span>
-        <strong>Два согласия — и кнопки откроются</strong>
-      </div>
-      <div class="consent-fields">
-        <label><input type="checkbox" id="offerConsent"><span>Я принимаю условия <a href="https://disk.yandex.ru/d/UmcB7vXuuUsvjw" target="_blank" rel="noopener">публичной оферты</a>.</span></label>
-        <label><input type="checkbox" id="privacyConsent"><span>Я даю согласие на обработку персональных данных и ознакомилась с <a href="https://disk.yandex.ru/d/UmcB7vXuuUsvjw" target="_blank" rel="noopener">политикой обработки персональных данных</a>.</span></label>
-        <p class="consent-error" id="consentError" role="alert">Поставьте обе галочки, чтобы перейти к оплате.</p>
-      </div>
-    </section>
-
     <section class="offers section" id="offers">
       <div class="collection-head">
         <p class="section-no">01</p>
@@ -225,6 +213,22 @@
   <div class="mobile-bar">
     <div><span>Полный фарш</span><strong>15 999 ₽</strong></div>
     <a href="https://payform.ru/b6cWEp3/" target="_blank" rel="noopener" data-buy data-product="Полный фарш">Купить ↗</a>
+  </div>
+
+  <div class="purchase-modal" id="purchaseModal" hidden>
+    <button class="purchase-modal-backdrop" type="button" data-modal-close aria-label="Закрыть окно оплаты"></button>
+    <section class="purchase-modal-card" role="dialog" aria-modal="true" aria-labelledby="purchaseModalTitle">
+      <button class="purchase-modal-close" type="button" data-modal-close aria-label="Закрыть">×</button>
+      <p class="eyebrow pink">ПЕРЕД ОПЛАТОЙ</p>
+      <h2 id="purchaseModalTitle">Подтвердите согласия</h2>
+      <p class="purchase-product">Вы выбрали: <strong id="purchaseProductName"></strong></p>
+      <div class="purchase-consents">
+        <label><input type="checkbox" id="modalOfferConsent"><span>Я принимаю условия <a href="https://disk.yandex.ru/d/UmcB7vXuuUsvjw" target="_blank" rel="noopener">публичной оферты</a>.</span></label>
+        <label><input type="checkbox" id="modalPrivacyConsent"><span>Я даю согласие на обработку персональных данных и ознакомилась с <a href="https://disk.yandex.ru/d/UmcB7vXuuUsvjw" target="_blank" rel="noopener">политикой обработки персональных данных</a>.</span></label>
+      </div>
+      <p class="purchase-error" id="purchaseError" role="alert">Поставьте обе галочки, чтобы перейти к оплате.</p>
+      <a class="buy-button purchase-confirm" id="purchaseConfirm" href="#" target="_blank" rel="noopener" aria-disabled="true">Перейти к оплате <b>↗</b></a>
+    </section>
   </div>
 
   <script src="script.js"></script>

@@ -1,7 +1,12 @@
-const offer = document.querySelector('#offerConsent');
-const privacy = document.querySelector('#privacyConsent');
 const buyLinks = [...document.querySelectorAll('[data-buy]')];
-const error = document.querySelector('#consentError');
+const modal = document.querySelector('#purchaseModal');
+const productName = document.querySelector('#purchaseProductName');
+const offer = document.querySelector('#modalOfferConsent');
+const privacy = document.querySelector('#modalPrivacyConsent');
+const confirmPurchase = document.querySelector('#purchaseConfirm');
+const error = document.querySelector('#purchaseError');
+const closeButtons = [...document.querySelectorAll('[data-modal-close]')];
+let pendingPaymentUrl = '';
 
 function consentReady() {
   return Boolean(offer?.checked && privacy?.checked);
@@ -9,21 +14,47 @@ function consentReady() {
 
 function syncPurchaseState() {
   const ready = consentReady();
-  buyLinks.forEach((link) => {
-    link.setAttribute('aria-disabled', String(!ready));
-    link.tabIndex = ready ? 0 : -1;
-  });
+  confirmPurchase?.setAttribute('aria-disabled', String(!ready));
+  if (confirmPurchase) confirmPurchase.tabIndex = ready ? 0 : -1;
   if (ready) error?.classList.remove('show');
+}
+
+function openPurchaseModal(link) {
+  pendingPaymentUrl = link.href;
+  if (productName) productName.textContent = link.dataset.product || 'выбранный продукт';
+  if (confirmPurchase) confirmPurchase.href = pendingPaymentUrl;
+  if (offer) offer.checked = false;
+  if (privacy) privacy.checked = false;
+  error?.classList.remove('show');
+  syncPurchaseState();
+  if (modal) modal.hidden = false;
+  document.body.classList.add('modal-open');
+  requestAnimationFrame(() => offer?.focus());
+}
+
+function closePurchaseModal() {
+  if (modal) modal.hidden = true;
+  document.body.classList.remove('modal-open');
+  pendingPaymentUrl = '';
 }
 
 buyLinks.forEach((link) => {
   link.addEventListener('click', (event) => {
-    if (consentReady()) return;
     event.preventDefault();
-    error?.classList.add('show');
-    document.querySelector('#consent')?.scrollIntoView({behavior:'smooth', block:'center'});
-    offer?.focus({preventScroll:true});
+    openPurchaseModal(link);
   });
+});
+
+confirmPurchase?.addEventListener('click', (event) => {
+  if (consentReady() && pendingPaymentUrl) return;
+  event.preventDefault();
+  error?.classList.add('show');
+  offer?.focus();
+});
+
+closeButtons.forEach((button) => button.addEventListener('click', closePurchaseModal));
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && modal && !modal.hidden) closePurchaseModal();
 });
 
 offer?.addEventListener('change', syncPurchaseState);
