@@ -174,6 +174,30 @@
       </div>
     </section>
 
+    <section class="max-offer section" id="max-marathon">
+      <div class="max-offer-copy">
+        <p class="eyebrow">НОВОЕ В ПОДБОРКЕ / ДЛЯ ЭКСПЕРТОВ</p>
+        <h2>Сейчас — самое время зайти в MAX.<br><em>В январе — заявить о себе.</em></h2>
+        <p class="max-offer-lead">Наш ноябрьский марафон в MAX уже показал: здесь есть живой интерес — активное общение, вопросы и отличный отклик на эфиры.</p>
+        <p>В январе проведём новый MAX-марафон на новогодних праздниках, когда у аудитории больше времени для общения и знакомств. Присоединяйтесь как эксперт и представьте свою практику новым людям.</p>
+      </div>
+
+      <div class="max-offer-options">
+        <article>
+          <span>УЧАСТИЕ С АНОНСАМИ</span>
+          <div class="price-row"><s>4 000 ₽</s><strong>2 500 ₽</strong></div>
+        </article>
+        <article>
+          <span>УЧАСТИЕ БЕЗ АНОНСОВ</span>
+          <div class="price-row"><s>5 000 ₽</s><strong>3 500 ₽</strong></div>
+        </article>
+        <div class="max-offer-action">
+          <p><strong>Только 4 места по специальной цене.</strong><br>Выгода — 1 500 ₽ на каждом тарифе. Точную дату и условия участия обсудим лично.</p>
+          <a class="buy-button" href="https://t.me/tati012?text=%D0%A2%D0%B0%D0%BD%D1%8F%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%BE%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C%20%D1%83%D1%87%D0%B0%D1%81%D1%82%D0%B8%D0%B5%20%D0%B2%20%D1%8F%D0%BD%D0%B2%D0%B0%D1%80%D1%81%D0%BA%D0%BE%D0%BC%20MAX-%D0%BC%D0%B0%D1%80%D0%B0%D1%84%D0%BE%D0%BD%D0%B5." target="_blank" rel="noopener" data-buy data-mode="contact" data-product="участие в январском MAX-марафоне">Обсудить участие <b>↗</b></a>
+        </div>
+      </div>
+    </section>
+
     <section class="deadline section-narrow">
       <p class="eyebrow">СКОРО ЗАКРЫТИЕ</p>
       <h2>После 12 ноября<br>витрина закроется.</h2>
@@ -220,15 +244,15 @@
     <button class="purchase-modal-backdrop" type="button" data-modal-close aria-label="Закрыть окно оплаты"></button>
     <section class="purchase-modal-card" role="dialog" aria-modal="true" aria-labelledby="purchaseModalTitle">
       <button class="purchase-modal-close" type="button" data-modal-close aria-label="Закрыть">×</button>
-      <p class="eyebrow pink">ПЕРЕД ОПЛАТОЙ</p>
+      <p class="eyebrow pink" id="purchaseModalEyebrow">ПЕРЕД ОПЛАТОЙ</p>
       <h2 id="purchaseModalTitle">Подтвердите согласия</h2>
       <p class="purchase-product">Вы выбрали: <strong id="purchaseProductName"></strong></p>
       <div class="purchase-consents">
-        <label><input type="checkbox" id="modalOfferConsent"><span>Я принимаю условия <a href="https://disk.yandex.ru/d/UmcB7vXuuUsvjw" target="_blank" rel="noopener">публичной оферты</a>.</span></label>
-        <label><input type="checkbox" id="modalPrivacyConsent"><span>Я даю согласие на обработку персональных данных и ознакомилась с <a href="https://disk.yandex.ru/d/UmcB7vXuuUsvjw" target="_blank" rel="noopener">политикой обработки персональных данных</a>.</span></label>
+        <label><input type="checkbox" id="modalOfferConsent"><span id="modalOfferText">Я принимаю условия <a href="https://disk.yandex.ru/d/UmcB7vXuuUsvjw" target="_blank" rel="noopener">публичной оферты</a>.</span></label>
+        <label><input type="checkbox" id="modalPrivacyConsent"><span id="modalPrivacyText">Я даю согласие на обработку персональных данных и ознакомилась с <a href="https://disk.yandex.ru/d/UmcB7vXuuUsvjw" target="_blank" rel="noopener">политикой обработки персональных данных</a>.</span></label>
       </div>
       <p class="purchase-error" id="purchaseError" role="alert">Поставьте обе галочки, чтобы перейти к оплате.</p>
-      <a class="buy-button purchase-confirm" id="purchaseConfirm" href="#" target="_blank" rel="noopener" aria-disabled="true">Перейти к оплате <b>↗</b></a>
+      <a class="buy-button purchase-confirm" id="purchaseConfirm" href="#" target="_blank" rel="noopener" aria-disabled="true"><span id="purchaseConfirmLabel">Перейти к оплате</span> <b>↗</b></a>
     </section>
   </div>
 
