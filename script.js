@@ -10,7 +10,36 @@ const confirmPurchase = document.querySelector('#purchaseConfirm');
 const confirmLabel = document.querySelector('#purchaseConfirmLabel');
 const error = document.querySelector('#purchaseError');
 const closeButtons = [...document.querySelectorAll('[data-modal-close]')];
+const deadline = new Date('2026-11-12T23:59:00+03:00').getTime();
+const deadlineSection = document.querySelector('.deadline');
 let pendingPaymentUrl = '';
+let saleClosed = false;
+
+function closeSale() {
+  if (saleClosed) return;
+  saleClosed = true;
+  closePurchaseModal();
+  document.body.classList.add('sale-is-closed');
+
+  buyLinks.forEach((link) => {
+    link.removeAttribute('href');
+    link.removeAttribute('target');
+    link.setAttribute('aria-disabled', 'true');
+    link.classList.add('sale-closed');
+    link.textContent = 'Продажа закрыта';
+  });
+
+  const eyebrow = deadlineSection?.querySelector('.eyebrow');
+  const title = deadlineSection?.querySelector('h2');
+  const action = deadlineSection?.querySelector('.arrow-link');
+  if (eyebrow) eyebrow.textContent = 'BLACK DROP ЗАВЕРШЁН';
+  if (title) title.innerHTML = 'Витрина<br>закрыта.';
+  if (action) {
+    action.removeAttribute('href');
+    action.setAttribute('aria-disabled', 'true');
+    action.textContent = 'Продажа завершена';
+  }
+}
 
 function consentReady() {
   return Boolean(offer?.checked && privacy?.checked);
@@ -55,6 +84,10 @@ function closePurchaseModal() {
 buyLinks.forEach((link) => {
   link.addEventListener('click', (event) => {
     event.preventDefault();
+    if (Date.now() >= deadline) {
+      closeSale();
+      return;
+    }
     openPurchaseModal(link);
   });
 });
@@ -75,7 +108,6 @@ offer?.addEventListener('change', syncPurchaseState);
 privacy?.addEventListener('change', syncPurchaseState);
 syncPurchaseState();
 
-const deadline = new Date('2026-11-12T23:59:00+03:00').getTime();
 const timerIds = ['days','hours','minutes','seconds'];
 
 function updateTimer() {
@@ -90,6 +122,7 @@ function updateTimer() {
     const node = document.getElementById(id);
     if (node) node.textContent = String(values[index]).padStart(2, '0');
   });
+  if (remaining === 0) closeSale();
 }
 
 updateTimer();
